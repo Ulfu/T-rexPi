@@ -28,9 +28,9 @@ def steeringThrust(turnPercent):
     speed2 = speed
     
     if turnPercent < 0:
-        speed1 = speed * turnPercent / (-100)
+        speed1 = speed * (1 + turnPercent / 100)
     if turnPercent > 0:
-        speed2 = speed * turnPercent / 100
+        speed2 = speed * (1 - turnPercent / 100)
 
     thrust(speed1, speed2)
         
