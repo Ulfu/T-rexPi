@@ -1,15 +1,12 @@
 import socket
 import sys
 
-class mySocket:
+class serverSocket:
     def __init__(self, host, port):
         self.Host = host
         self.Port = port
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            self.s.bind((host, port))
-        except socket.error as msg:
-            print ('Bind failed. Error Code : ' , str(msg[0]) , ' Message ' , msg[1])
+        self.s.bind((host, port))
         self.s.listen(1)
         print('Socket listens on port ', port)
     def connect(self):
