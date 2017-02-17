@@ -14,7 +14,10 @@ class serverSocket:
         print('Connected with ', addr[0], ':',  str(addr[1]))
 
     def recData(self):
-        return self.conn.recv(16)
+        try:
+            return self.conn.recv(16)
+        except s.timeout:
+            raise timeOut('Timeout on ', self.conn)
 
     def getData(self, data, lsb, msb):
         return int.from_bytes(data[lsb:msb], byteorder='little', signed=True)
