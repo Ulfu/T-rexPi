@@ -21,15 +21,20 @@ def runLidar(host):
 def runMotors(host):
     print('Run Motors')
     motorControl.setup()
-    app = mySocket.serverSocket(host, 6510)
-    app.connect() #Host , port
     while True:
-        data = app.recData()
-        steeringThrust = app.getData(data, 0, 8)
-        thrust = app.getData(data, 8, 16)
-        motorControl.steeringThrust(thrust, steeringThrust)
-        print(thrust , ' ', steeringThrust) #For debugging
-        #time.sleep(0.01) #Try without the pause
+        app = mySocket.serverSocket(host, 6510)
+        app.connect() #Host , port
+        app.setTimeOut()
+        while True:
+            try:
+                data = app.recData()
+                steeringThrust = app.getData(data, 0, 8)
+                thrust = app.getData(data, 8, 16)
+                motorControl.steeringThrust(thrust, steeringThrust)
+                print(thrust , ' ', steeringThrust) #For debugging
+                #time.sleep(0.01) #Try without the pause
+            except socket.timeout:
+                break;
 
 _thread.start_new_thread(runLidar, (HOST,))
 
