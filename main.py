@@ -33,7 +33,8 @@ def runMotors(host):
                 motorControl.steeringThrust(thrust, steeringThrust)
                 print(thrust , ' ', steeringThrust) #For debugging
                 #time.sleep(0.01) #Try without the pause
-            except socket.timeout:
+            except app.timeOut:
+                print(app.timeOut)
                 break;
 
 _thread.start_new_thread(runLidar, (HOST,))
