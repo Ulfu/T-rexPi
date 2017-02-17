@@ -20,6 +20,7 @@ class serverSocket:
         return int.from_bytes(data[lsb:msb], byteorder='little', signed=True)
 
     def sendData(self, data):
-        s.sendall(data)
+        self.s.sendall(data)
         
-    
+    def setTimeOut(self):
+        self.s.settimeout(5)
