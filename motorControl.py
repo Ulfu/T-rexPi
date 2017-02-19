@@ -22,6 +22,8 @@ def setThrust(speed1, speed2):
 def steeringThrust(thrust, turnPercent):
     thrust = clamp(thrust,-100, 100)
     turnPercent = clamp(turnPercent,-100, 100)
+    thrust = clampIf(thrust,-10, 10)
+    turnPercent = clampIf(turnPercent,-10, 10)
 
     if (thrust < 0):
         direction = false
@@ -66,3 +68,8 @@ def setup():    #setup motor pins as outputs
     m2 = GPIO.PWM(motors[1][2], 50)
     m1.start(0)
     m2.start(0)
+    
+def clampIf(n, minVal, maxVal):
+    if (n > minVal and n <maxVal):
+        n = 0
+    return n
