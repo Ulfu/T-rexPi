@@ -4,6 +4,7 @@ import motorControl
 #import servoControl
 import time#
 import mySocket
+import myCamera
 
 HOST = ''
 def runLidar(host):
@@ -21,8 +22,8 @@ def runLidar(host):
 def runMotors(host):
     print('Run Motors')
     motorControl.setup()
+    app = mySocket.serverSocket(host, 6510)
     while True:
-        app = mySocket.serverSocket(host, 6510)
         app.connect() #Host , port
         app.setTimeOut()
         while True:
@@ -37,6 +38,26 @@ def runMotors(host):
                 print(app.timeOut)
                 break;
 
+def cameraStream(host):
+    print('Run cameraStream')
+    camera = myCamera.cameraClass(800, 600)
+    cameraSocket = mySocket.serverSocket(host, 6515)
+    while True:
+        cameraSocket.connect() #Host , port
+        cameraSocket.setTimeOut()
+        while True:
+            try:
+                camera.capture('tempFrame')
+                data = camera.convertToBinary('tempFrame')
+                cameraSocket.sendData(data)
+                #print(data) #For debugging
+                #time.sleep(0.01) #Try without the pause
+            except cameraSocket.timeOut:
+                print(cameraSocket.timeOut)
+                break;
+                
 _thread.start_new_thread(runLidar, (HOST,))
 
 _thread.start_new_thread(runMotors, (HOST,))
+
+_thread.start_new_thread(cameraStream, (HOST,))
