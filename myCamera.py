@@ -18,5 +18,6 @@ class cameraClass:
         with open(name, 'rb') as imageFile:
         file = imageFile.read()
         b = bytearray(file)
+		return b
         #print b[0]
 
