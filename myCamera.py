@@ -8,6 +8,15 @@ class cameraClass:
         self.camera.resolution = (resolutionX, resolutionY)
         
 	def capture(self, name):#capture image
+        name = name + '.png'
         camera.start_preview()
-        camera.capture(name,'.png')
+        camera.capture(name)
         camera.close()
+
+    def convertToBinary(self, name):
+        name = name + '.png'
+        with open(name, 'rb') as imageFile:
+        file = imageFile.read()
+        b = bytearray(file)
+        #print b[0]
+
