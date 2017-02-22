@@ -26,18 +26,18 @@ def steeringThrust(thrust, turnPercent):
     turnPercent = clampIf(turnPercent,-10, 10)
 
     if (thrust < 0):
-        direction = false
+        direction = False
         thrust = abs(thrust)
     else:
-        direction = False
+        direction = True
     
     speed1 = thrust
     speed2 = thrust
     
     if (turnPercent < 0):
-        speed1 = speed * (1 + turnPercent / 100)
+        speed1 = thrust * (1 + turnPercent / 100)
     elif (turnPercent > 0):
-        speed2 = speed * (1 - turnPercent / 100)
+        speed2 = thrust * (1 - turnPercent / 100)
 
     forward(direction)
     setThrust(speed1, speed2)
