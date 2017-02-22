@@ -29,8 +29,8 @@ def runMotors(host):
         while True:
             try:
                 data = app.recData()
-                steeringThrust = app.getData(data, 0, 8)
-                thrust = app.getData(data, 8, 16)
+                thrust = app.getData(data, 0, 8)
+                steeringThrust = app.getData(data, 8, 16)
                 motorControl.steeringThrust(thrust, steeringThrust)
                 print(thrust , ' ', steeringThrust) #For debugging
                 #time.sleep(0.01) #Try without the pause
