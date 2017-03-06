@@ -56,12 +56,8 @@ def setup():    #setup motor pins as outputs
     #for i in range(2):
         #GPIO.setup(motors[0][i], GPIO.OUT)
         #GPIO.setup(motors[1][i], GPIO.OUT)
-    GPIO.setup(motors[0][0], GPIO.OUT)
-    GPIO.setup(motors[1][0], GPIO.OUT)
-    GPIO.setup(motors[0][1], GPIO.OUT)
-    GPIO.setup(motors[1][1], GPIO.OUT)
-    GPIO.setup(motors[0][2], GPIO.OUT)
-    GPIO.setup(motors[1][2], GPIO.OUT)
+    GPIO.setup(motors[0], GPIO.OUT)
+    GPIO.setup(motors[1], GPIO.OUT)
     global m1
     m1 = GPIO.PWM(motors[0][2], 50)
     global m2

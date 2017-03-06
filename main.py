@@ -32,7 +32,7 @@ def runMotors(host):
                 thrust = app.getData(data, 0, 8)
                 steeringThrust = app.getData(data, 8, 16)
                 motorControl.steeringThrust(thrust, steeringThrust)
-                print(thrust , ' ', steeringThrust) #For debugging
+                #print(thrust , ' ', steeringThrust) #For debugging
                 #time.sleep(0.01) #Try without the pause
             except app.timeOut:
                 print(app.timeOut)
@@ -47,6 +47,7 @@ def cameraStream(host):
         cameraSocket.setTimeOut()
         while True:
             try:
+                print('pic')
                 camera.capture('tempFrame')
                 data = camera.convertToBinary('tempFrame')
                 cameraSocket.sendData(data)
