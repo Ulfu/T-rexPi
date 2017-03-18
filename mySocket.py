@@ -9,6 +9,10 @@ class serverSocket:
         self.s.bind((host, port))
         self.s.listen(1)
         print('Socket listens on port ', port)
+
+    def makefile(self):
+        return self.conn.makefile('VideoStream')
+        
     def connect(self):
         self.conn, self.addr = self.s.accept()
         print('Connected with ', self.addr[0], ':',  str(self.addr[1]))
@@ -30,3 +34,7 @@ class serverSocket:
         
     def setTimeOut(self):
         self.s.settimeout(5)
+
+    def end(self):
+        self.conn.close()
+        self.s.close()

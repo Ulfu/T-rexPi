@@ -7,17 +7,11 @@ class cameraClass:
                 self.camera = PiCamera()
                 self.camera.resolution = (resolutionX, resolutionY)
         
-        def capture(self, name):#capture image
-                name = name + '.png'
-                #camera.start_preview()
-                self.camera.capture(name)
-                #camera.close()
+	def capture(self, name):#capture to stream
+                self.camera.start_recording(connection, format='h264')
+                self.camera.wait_recording(60)
 
-        def convertToBinary(self, name):
-                name = name + '.png'
-                with open(name, 'rb') as imageFile:
-                        file = imageFile.read()
-                        b = bytearray(file)
-                        return b
-                #print b[0]
+        def end(self):
+                self.camera.stop_recording()
+
 

@@ -39,23 +39,19 @@ def runMotors(host):
                 break;
 
 def cameraStream(host):
-    print('Run cameraStream')
-    camera = myCamera.cameraClass(800, 600)
-    cameraSocket = mySocket.serverSocket(host, 6515)
     while True:
+        print('Run cameraStream')
+        camera = myCamera.cameraClass(800, 600)
+        cameraSocket = mySocket.serverSocket(host, 6515) 
         cameraSocket.connect() #Host , port
-        cameraSocket.setTimeOut()
-        while True:
-            try:
-                print('pic')
-                camera.capture('tempFrame')
-                data = camera.convertToBinary('tempFrame')
-                cameraSocket.sendData(data)
-                #print(data) #For debugging
-                #time.sleep(0.01) #Try without the pause
-            except cameraSocket.timeOut:
-                print(cameraSocket.timeOut)
-                break;
+        stream = cameraSocket.makefile()
+        camera.startCapture(stream)
+        try:
+            while True:
+                camera.capture() #Exit to finally if something goes wrong
+        finally:
+            camera.end()
+            cameraSocket.end()
                 
 _thread.start_new_thread(runLidar, (HOST,))
 
