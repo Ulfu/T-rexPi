@@ -11,7 +11,7 @@ class serverSocket:
         print('Socket listens on port ', port)
 
     def makefile(self):
-        return self.conn.makefile('VideoStream')
+        return self.conn.makefile('wb')
         
     def connect(self):
         self.conn, self.addr = self.s.accept()

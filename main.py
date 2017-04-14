@@ -45,10 +45,10 @@ def cameraStream(host):
         cameraSocket = mySocket.serverSocket(host, 6515) 
         cameraSocket.connect() #Host , port
         stream = cameraSocket.makefile()
-        camera.startCapture(stream)
+        camera.capture(stream)
         try:
             while True:
-                camera.capture() #Exit to finally if something goes wrong
+                camera.wait() #Exit to finally if something goes wrong
         finally:
             camera.end()
             cameraSocket.end()

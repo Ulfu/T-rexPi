@@ -6,10 +6,12 @@ class cameraClass:
                 self.resolutionY = resolutionY
                 self.camera = PiCamera()
                 self.camera.resolution = (resolutionX, resolutionY)
-        
-	def capture(self, name):#capture to stream
-                self.camera.start_recording(connection, format='h264')
-                self.camera.wait_recording(60)
+
+        def capture(self, name):#capture to stream
+                self.camera.start_recording(name, format='h264')
+                
+        def wait(self):
+                self.camera.wait_recording(5)
 
         def end(self):
                 self.camera.stop_recording()
